@@ -30,6 +30,6 @@ class XlsxController extends Controller
     */
     public function fileExport() 
     {
-        return Excel::download(new XlsxsExport, 'users-collection.txt');
+        return Excel::download(new XlsxsExport, 'users-collection.xlsx');
     }    
 }
