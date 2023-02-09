@@ -6,30 +6,33 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\XlsxsImport;
 use App\Exports\XlsxsExport;
+use Illuminate\Support\Facades\DB;
 
 class XlsxController extends Controller
 {
-     /**
-    * @return \Illuminate\Support\Collection
-    */
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function fileImportExport()
     {
-       return view('file-import');
+        $data = DB::table('xlsxes')->get()->all();
+        return view('file-import',compact('data'));
     }
-   
+
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function fileImport(Request $request) 
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileImport(Request $request)
     {
         Excel::import(new XlsxsImport, $request->file('file')->store('temp'));
-        return back();
+        $data = DB::table('xlsxes')->get()->all();
+        return view('file-import',compact('data'));
     }
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function fileExport() 
+     * @return \Illuminate\Support\Collection
+     */
+    public function fileExport()
     {
-        return Excel::download(new XlsxsExport, 'users-collection.xlsx');
-    }    
+        return Excel::download(new XlsxsExport, 'data-collection.xlsx');
+    }
 }

@@ -7,6 +7,30 @@
     <title>Import Export Excel & CSV to Database in Laravel 7</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
+<style>
+    .div-table {
+        display: table;
+        width: auto;
+        background-color: #eee;
+        border: 1px solid #666666;
+        border-spacing: 5px;
+        /* cellspacing:poor IE support for  this */
+    }
+
+    .div-table-row {
+        display: table-row;
+        width: auto;
+        clear: both;
+    }
+
+    .div-table-col {
+        float: left;
+        /* fix for  buggy browsers */
+        display: table-column;
+        width: 200px;
+        background-color: #ccc;
+    }
+</style>
 
 <body>
     <div class="container mt-5 text-center">
@@ -26,30 +50,27 @@
         </form>
         <br>
         <br>
-        <div class=" card-content table-responsive">
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <th>Subject</th>
-                    <th>Body</th>
-                    <th>Characters</th>
-                </thead>
-                <tbody>
-                    @if(!empty($data) && $data->count())
-                    @foreach($data as $row)
-                    <tr>
-                        <td>{{ $row->Subject }}</td>
-                        <td>{{ $row->Body }}</td>
-                        <td>{{ $row->Characters }}</td>
-                    </tr>
-                    @endforeach
-                    @else
-                    <tr>
-                        <td colspan="10">There are no data.</td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
+
+        @if(!empty($data))
+        @foreach($data as $row)
+        <div style="float: left; width: 33%; border: 1px solid #000000;">
+            <div>{{ $row->Subject }}</div>
         </div>
+        <div style="float: left; width: 33%; border: 1px solid #000000;">
+            <div>{{ $row->Body }}</div>
+        </div>
+        <div style="float: left; width: 33%; border: 1px solid #000000;">
+            <div>{{ $row->Characters }}</div>
+        </div>
+
+        @endforeach
+        @else
+        <div>
+            <div colspan="10">There are no data.</div>
+        </div>
+        @endif
+    </div>
+
 </body>
 
 </html>

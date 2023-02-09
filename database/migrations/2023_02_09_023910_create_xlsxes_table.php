@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('xlsxs', function (Blueprint $table) {
+        Schema::create('xlsxes', function (Blueprint $table) {
             $table->id();
             $table->longText('Subject')->nullable();
             $table->longText('Body')->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('xlsxs');
+        Schema::dropIfExists('xlsxes');
     }
 };
